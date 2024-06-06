@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 
 
-
+# Login for a user
 @api_view(['POST'])
 def login(request):
     
@@ -25,6 +25,7 @@ def login(request):
     return Response({"token": token.key, "user": serializer.data},
     status=status.HTTP_200_OK)
 
+# Register
 @api_view(['POST'])
 def register(request):
     serializer = UserSerializer(data=request.data)
@@ -45,6 +46,7 @@ def register(request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# Check who logged in
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

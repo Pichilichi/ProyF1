@@ -46,3 +46,10 @@ def getEvents(request):
     events = Event.objects.all()
     serializer = EventSerializer(events, many=True) # Many = true for everything, false if only one
     return Response(serializer.data)
+
+# Get an event by the specified id
+@api_view(['GET'])
+def getEvent(request, pk):
+    event = Event.objects.get(id=pk)
+    serializer = EventSerializer(event, many=False) # Single object
+    return Response(serializer.data)
