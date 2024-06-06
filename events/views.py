@@ -1,7 +1,8 @@
-from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
+@api_view(['GET'])
 def getEvents(request):
-
     routes = [
         {
             'Endpoint': '/events/',
@@ -35,4 +36,4 @@ def getEvents(request):
         },
     ]
 
-    return JsonResponse(routes, safe=False)
+    return Response(routes)
