@@ -7,5 +7,5 @@ urlpatterns = [
     re_path('login',views.login),
     re_path('register',views.register),
     re_path('profile',views.profile),
-    path('', include('events.urls')),
+    path('', include('events.urls')), # URLs from events app
 ]
