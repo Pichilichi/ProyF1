@@ -53,3 +53,34 @@ def getEvent(request, pk):
     event = Event.objects.get(id=pk)
     serializer = EventSerializer(event, many=False) # Single object
     return Response(serializer.data)
+
+# Create an event
+@api_view(['POST'])
+def createEvent(request):
+    data = request.data
+    
+    event = Event.objects.create(
+        body=data['body']
+    )
+    
+    serializer = EventSerializer(event, many=False)
+    return Response(serializer.data)
+
+# Update an event
+@api_view(['PUT'])
+def updateEvent(request, pk):
+    data = request.data
+    
+    event = Event.objects.get(id=pk)
+    serializer = EventSerializer(event, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        
+    return Response(serializer.data)
+
+# Delete an event
+@api_view(['DELETE'])
+def deleteEvent(request, pk):
+    event = Event.objects.get(id=pk)
+    event.delete()
+    return Response('Event deleted')
