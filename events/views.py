@@ -216,6 +216,23 @@ def getKarts(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+## MESSAGES ##
+
+# ALL OF THEM
+@api_view(['GET'])
+def getMessages(request):
+
+    if request.method == 'GET': #SEE
+        messages = Message.objects.all()
+        serializer = MessageSerializer(messages, many=True) # Many = true for everything, false if only one
+        return Response(serializer.data)
+    
+    elif request.method == 'POST': #CREATE
+        serializer = MessageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # # Get an event by the specified id
 # @api_view(['GET'])

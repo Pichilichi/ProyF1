@@ -22,6 +22,7 @@ urlpatterns = [
     path('circuits/<int:id>', views.getCircuitDetail),
     
     path('karts/', views.getKarts),
+    path('messages/', views.getMessages),
     
 ]
 
